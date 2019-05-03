@@ -1,0 +1,15 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background: white;
+    font-family: sans-serif;
+}
+
+#main {
+    position: absolute;
+    top: 0;
+}
+
+.motion-capture {
+ display: none;
+}
