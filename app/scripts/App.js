@@ -67,7 +67,7 @@ export default class App {
         //LIGHT
         this.newLight();
 
-        //POLLEN GENERATION
+        //AURA GENERATION
         this.auraCreate();
         //this.particulesCreate(.1);
 
@@ -275,9 +275,11 @@ export default class App {
         let random = Math.floor(Math.random()*(this.groupPollen.children.length-1));
         movemento = document.querySelector('#score').innerText /10000;
 
-        if(movemento > 0.03) {
+        if(movemento > 0.05) {
             this.lastMovemento.push(movemento);
             //console.log(this.lastMovemento)
+        } else {
+            this.lastMovemento.push('0');
         }
 
         //GROUP MOVEMENT
@@ -289,19 +291,19 @@ export default class App {
         this.pointLight.position.x = Math.cos(t / 752) * .1;
         this.pointLight.position.y = Math.sin(t / 438) * .1;
         this.pointLight.position.z = Math.sin(t / 678) * .1;
-        //this.pointLight.position.z = -.5;
         this.pointLightCircle.position.x = Math.cos(t / 678) *1.6;
         this.pointLightCircle.position.y = Math.sin(t / 678) *1.6;
+        //this.pointLight.position.z = -.5;
 
         //HEART MOVEMENT
-        let scaling = 1 + Math.abs(Math.sin(t/1000)*.05)
+        let scaling = 1 + Math.abs(Math.sin(t/1000)*.05);
 
         for ( let i = 0; i < this.groupPollen.children.length; i ++ ) {
             this.groupPollen.children[i].material.needsUpdate = true;
-            //POLLEN POSITION
+            //AURA POSITION
             this.groupPollen.position.z = 1.1;
-            this.groupPollen.children[i].position.x += Math.cos((t * 0.001) + this.groupPollen.children[i].position.x) * 0.01;
-            this.groupPollen.children[i].position.y += Math.sin((t * 0.001) + this.groupPollen.children[i].position.y) * 0.02;
+            this.groupPollen.children[i].position.x += Math.cos((t * 0.001) + this.groupPollen.children[i].position.x) * 0.01;//* (scaling*i/2)
+            this.groupPollen.children[i].position.y += Math.sin((t * 0.001) + this.groupPollen.children[i].position.y) * 0.02;//* (scaling*i/10)
             this.groupPollen.children[i].position.z += Math.sin((t * 0.001) + this.groupPollen.children[i].position.z) * 0.0005;
 
             this.groupPollen.children[i].scale.x += Math.sin((t * 0.001) + this.groupPollen.children[i].position.x) * (Math.random()*0.005);
@@ -334,6 +336,12 @@ export default class App {
 
             }
         }
+        //0.1463
+
+        if(this.lastMovemento[this.lastMovemento.length-1] == 0.1463) {
+            console.log('HOEHO')
+        }
+
         //LOW MOVEMENT
         /*
         if(movemento > 0.08 && this.acces == true){
